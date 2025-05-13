@@ -306,7 +306,7 @@ class Bot(object):
             timeout=self.timeout_s
         )
 
-    def send_file(self, chat_id, file_id=None, filename='file.unknown', file_content=None, caption=None, reply_msg_id=None, forward_chat_id=None,
+    def send_file(self, chat_id, file_id=None, filename=None, file_content=None, caption=None, reply_msg_id=None, forward_chat_id=None,
                   forward_msg_id=None, inline_keyboard_markup=None, parse_mode=None, format_=None):
         if parse_mode and format_:
             raise Exception("Cannot use format and parseMode fields at one time")
@@ -330,8 +330,8 @@ class Bot(object):
         )
         # Detects if file contents provided
         if file_content:
-            request.method = "POST"
-            request.files = {'file': (filename, file_content)}
+            request.method = 'POST'
+            request.files = {'file': (filename, file_content) if filename else file_content}
         return self.http_session.send(request=request.prepare(),timeout=self.timeout_s)
 
     def send_voice(self, chat_id, file_id=None, file=None, reply_msg_id=None, forward_chat_id=None,

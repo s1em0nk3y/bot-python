@@ -13,9 +13,12 @@ def message_cb(bot: Bot, event):
     bot.send_file(chat_id=event.from_chat,file_content="Some Text", filename="Text.txt")
     # Send text with no name
     bot.send_file(chat_id=event.from_chat,file_content="Some Text")
-    # Send binary data
+    # Send binary data from File
     with open('logo_bot.png', 'rb') as bf:
-        bot.send_file(chat_id=event.from_chat,file_content=bf.read())
+        bot.send_file(chat_id=event.from_chat,file_content=bf)
+    # Send binary data from bytes
+    with open('logo_bot.png', 'rb') as bf:
+        bot.send_file(chat_id=event.from_chat,file_content=bf.read(), filename="My File.png")
 
 
 
